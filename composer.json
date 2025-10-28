@@ -1,0 +1,10 @@
+{
+    "name": "pauldro/utility-belt-v2",
+    "type": "library",
+    "description": "Utilities",
+    "autoload": {
+        "psr-4": {
+            "Pauldro\\UtilityBelt\\": "src/"
+        }
+    }
+}
