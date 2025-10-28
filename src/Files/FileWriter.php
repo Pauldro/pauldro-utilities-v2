@@ -8,8 +8,8 @@
  */
 class FileWriter {
     private static $instance;
-    public  $errorMsg;
-    public  $lastWrittenFile;
+    public string $errorMsg;
+    public string $lastWrittenFile;
 
     public static function instance() : FileWriter
     {
