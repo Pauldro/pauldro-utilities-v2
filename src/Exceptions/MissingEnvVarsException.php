@@ -1,8 +1,8 @@
 <?php namespace Pauldro\UtilityBelt\Exceptions;
 
 class MissingEnvVarsException extends Exception {
-    private $vars = [];
-    private $filepath = '';
+    protected $vars = [];
+    protected $filepath = '';
 
     public function setVars(array $vars) : void 
     {
