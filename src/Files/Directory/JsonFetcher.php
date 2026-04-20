@@ -7,7 +7,7 @@ use Pauldro\UtilityBelt\Files\JsonFetcher as Fetcher;
  */
 class JsonFetcher extends FileFetcher {
     protected string $dir;
-    protected Fetcher $fetcher;
+    protected $fetcher;
     public string $errorMsg;
 
     public function __construct(string $dir) {
