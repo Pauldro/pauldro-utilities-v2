@@ -17,7 +17,7 @@ class FileCopier {
         return self::$instance;
     }
 
-    private function __construct() {
+    protected function __construct() {
 
     }
 
@@ -29,7 +29,7 @@ class FileCopier {
      */
     public function copy(string $fromFile, string $toFile) : bool
     {
-        $this->erromsg = '';
+        $this->errorMsg = '';
         $this->lastCopiedFile = '';
 
         if (file_exists($fromFile) === false) {
