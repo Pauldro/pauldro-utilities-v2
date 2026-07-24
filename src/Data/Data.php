@@ -1,4 +1,7 @@
-<?php namespace Pauldro\UtilityBelt\Data;
+<?php
+
+namespace Pauldro\UtilityBelt\Data;
+
 use ArrayObject;
 
 /**
@@ -8,14 +11,15 @@ use ArrayObject;
  * @property bool  $trackChanges  Track Changes?
  * @property array $changes       Array of previous values keyed by fieldnames
  */
-class Data implements \IteratorAggregate, \ArrayAccess {
+class Data implements \IteratorAggregate, \ArrayAccess
+{
     protected $data = [];
     protected $trackChanges = false;
     protected $changes = [];
 
-/* =============================================================
-    Getters
-============================================================= */
+    /* =============================================================
+        Getters
+    ============================================================= */
     /**
      * Returns the full array of properties set to this object
      *
@@ -23,7 +27,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * override this method to include that data as well.
      * @return array Returned array is associative and indexed by property name.
      */
-    public function getArray() : array
+    public function getArray(): array
     {
         return $this->data;
     }
@@ -41,7 +45,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @return mixed|null          Returns value of requested property, or null if the property was not found.
      *
      */
-    public function get($key) : mixed
+    public function get($key): mixed
     {
         $method = 'get' . ucfirst($key);
 
@@ -66,7 +70,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  string $key
      * @return mixed|null
      */
-    public function __get($key) : mixed
+    public function __get($key): mixed
     {
         return $this->get($key);
     }
@@ -76,7 +80,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param string $key
      * @return mixed
      */
-    public function __invoke($key) : mixed
+    public function __invoke($key): mixed
     {
         return $this->get($key);
     }
@@ -86,7 +90,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  int|string $key  Key of the item to check for existence.
      * @return bool             True if the item exists, false if not.
      */
-    public function has($key) : bool
+    public function has($key): bool
     {
         return $this->__isset($key);
     }
@@ -96,21 +100,22 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param string $key
      * @return bool
      */
-    public function __isset($key) : bool 
+    public function __isset($key): bool
     {
         return isset($this->data[$key]);
     }
 
-    protected function isEqual($key, $value1, $value2) : bool
+    protected function isEqual($key, $value1, $value2): bool
     {
-        if($key) {} // avoid unused argument notice
+        if ($key) {
+        } // avoid unused argument notice
         // $key not used here, but may be used by child classes
-        return $value1 === $value2; 	
+        return $value1 === $value2;
     }
 
-/* =============================================================
-    Setters
-============================================================= */
+    /* =============================================================
+        Setters
+    ============================================================= */
     /**
      * Set a value to this object’s data
      *
@@ -129,7 +134,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  mixed  $value  Value of property
      * @return $this
      */
-    public function set($key, $value) : static
+    public function set($key, $value): static
     {
         if ($key === 'data') {
             if (is_array($value) === false) {
@@ -159,7 +164,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  mixed $value
      * @return void
      */
-    public function setWithoutTracking($key, $value) : static
+    public function setWithoutTracking($key, $value): static
     {
         $isTracking = $this->getTrackChanges();
         if ($isTracking) {
@@ -179,7 +184,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  array $data Associative array of where the keys are property names, and values are… values.
      * @return $this
      */
-    public function setArray(array $data) : static 
+    public function setArray(array $data): static
     {
         foreach ($data as $key => $value) {
             $this->__set($key, $value);
@@ -192,9 +197,9 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  string $key
      * @param  mixed $value
      */
-    public function __set($key, $value) : void
+    public function __set($key, $value): void
     {
-        $method = "set".ucfirst($key);
+        $method = 'set' . ucfirst($key);
 
         if (method_exists($this, $method)) {
             $this->$method($value);
@@ -204,14 +209,14 @@ class Data implements \IteratorAggregate, \ArrayAccess {
         return;
     }
 
-/* =============================================================
-    Removal
-============================================================= */
+    /* =============================================================
+        Removal
+    ============================================================= */
     /**
      * Ensures that unset() works for this classes data.
      * @param string $key
      */
-    public function __unset($key) : void
+    public function __unset($key): void
     {
         $this->remove($key);
         return;
@@ -225,35 +230,35 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param string $key Name of property you want to remove
      * @return $this
      */
-    public function remove($key) : static
+    public function remove($key): static
     {
         $value = isset($this->data[$key]) ? $this->data[$key] : null;
-        $this->trackChange($key, $value, null); 
+        $this->trackChange($key, $value, null);
         unset($this->data[$key]);
         return $this;
     }
 
-/* =============================================================
-    IteratorAggregate Interface Functions
-============================================================= */
+    /* =============================================================
+        IteratorAggregate Interface Functions
+    ============================================================= */
     /**
      * Enables the object data properties to be iterable as an array
      * @return ArrayObject
      */
-    public function getIterator() : ArrayObject
+    public function getIterator(): ArrayObject
     {
         return new ArrayObject($this->data);
     }
 
-/* =============================================================
-    ArrayAccess Interface Functions
-============================================================= */
+    /* =============================================================
+        ArrayAccess Interface Functions
+    ============================================================= */
     /**
      * Sets an index in the Array.
      * @param int|string              $key    Key of item to set.
      * @param int|string|array|object $value  Value of item.
      */
-    public function offsetSet($key, $value) : void 
+    public function offsetSet($key, $value): void
     {
         $this->set($key, $value);
     }
@@ -262,7 +267,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  int|string               $key  Key of item to retrieve.
      * @return int|string|array|object        Value of item requested, or false if it doesn't exist.
      */
-    public function offsetGet($key) : mixed
+    public function offsetGet($key): mixed
     {
         $value = $this->get($key);
         return is_null($value) ? false : $value;
@@ -273,7 +278,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  int|string $key Key of the item to unset.
      * @return bool            True if item existed and was unset. False if item didn't exist.
      */
-    public function offsetUnset($key) : void
+    public function offsetUnset($key): void
     {
         if ($this->__isset($key)) {
             $this->remove($key);
@@ -287,48 +292,48 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * @param  int|string $key  Key of the item to check for existence.
      * @return bool             True if the item exists, false if not.
      */
-    public function offsetExists($key) : bool
+    public function offsetExists($key): bool
     {
         return $this->__isset($key);
     }
 
-/* =============================================================
-    Changes
-============================================================= */
-    public function getTrackChanges() : bool
+    /* =============================================================
+        Changes
+    ============================================================= */
+    public function getTrackChanges(): bool
     {
-        return $this->trackChanges; 
+        return $this->trackChanges;
     }
 
-    public function isTrackingChanges() : bool
+    public function isTrackingChanges(): bool
     {
-        return $this->trackChanges; 
+        return $this->trackChanges;
     }
 
-    public function setTrackChanges(bool $track) : void
+    public function setTrackChanges(bool $track): void
     {
         $this->trackChanges = $track;
     }
 
-    public function untrackChange($fieldname) : void
+    public function untrackChange($fieldname): void
     {
-        unset($this->changes[$fieldname]); 
+        unset($this->changes[$fieldname]);
     }
 
-    public function hasChanged($fieldname = '') : bool
+    public function hasChanged($fieldname = ''): bool
     {
         if (empty($fieldname)) {
-            return count($this->changes) > 0; 
+            return count($this->changes) > 0;
         }
-        return array_key_exists($fieldname, $this->changes); 
+        return array_key_exists($fieldname, $this->changes);
     }
 
-    public function resetChanges($trackChanges = true) : void
+    public function resetChanges($trackChanges = true): void
     {
         $this->changes = [];
     }
 
-    public function getChanges() : array
+    public function getChanges(): array
     {
         return $this->changes;
     }
@@ -337,7 +342,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
      * Return current values of changed fields
      * @return array<mixed|null>
      */
-    public function getCurrentChanges() : array
+    public function getCurrentChanges(): array
     {
         $keys = array_keys($this->changes);
 
@@ -352,7 +357,7 @@ class Data implements \IteratorAggregate, \ArrayAccess {
         return $list;
     }
 
-    public function trackChange($fieldname, $old = null, $new = null) : void
+    public function trackChange($fieldname, $old = null, $new = null): void
     {
         if ($this->trackChanges === false) {
             return;

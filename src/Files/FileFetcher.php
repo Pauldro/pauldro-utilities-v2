@@ -1,18 +1,20 @@
-<?php namespace Pauldro\UtilityBelt\Files;
+<?php
 
+namespace Pauldro\UtilityBelt\Files;
 
 /**
  * Utility for fetching file contents
  */
-class FileFetcher {
+class FileFetcher
+{
     protected static $instance;
     public string $errorMsg;
 
-    protected function __construct() {
-
+    protected function __construct()
+    {
     }
 
-    public static function instance() : static
+    public static function instance(): static
     {
         if (empty(static::$instance)) {
             static::$instance = new static();
@@ -25,7 +27,7 @@ class FileFetcher {
      * @param  string $filepath
      * @return bool
      */
-    public function exists(string $filepath) : bool
+    public function exists(string $filepath): bool
     {
         return file_exists($filepath);
     }
@@ -35,7 +37,7 @@ class FileFetcher {
      * @param  string $filepath
      * @return bool|string
      */
-    public function fetchContents(string $filepath) : bool|string
+    public function fetchContents(string $filepath): bool|string
     {
         return file_get_contents($filepath);
     }
@@ -45,7 +47,7 @@ class FileFetcher {
      * @param  string $filepath
      * @return mixed
      */
-    public function fetch(string $filepath) : mixed
+    public function fetch(string $filepath): mixed
     {
         if ($this->exists($filepath) === false) {
             $this->errorMsg = "File not found: $filepath";
@@ -58,7 +60,7 @@ class FileFetcher {
      * @param  string $filepath
      * @return bool
      */
-    public function delete(string $filepath) : bool
+    public function delete(string $filepath): bool
     {
         return unlink($filepath);
     }
@@ -68,7 +70,7 @@ class FileFetcher {
      * @param  string $filepath
      * @return int
      */
-    public function modified($filepath) : bool|int
+    public function modified($filepath): bool|int
     {
         if ($this->exists($filepath) === false) {
             return 0;
@@ -81,7 +83,7 @@ class FileFetcher {
      * @param  string $filepath
      * @return bool
      */
-    public function convertToUtf8(string $filepath) : bool
+    public function convertToUtf8(string $filepath): bool
     {
         if ($this->exists($filepath) === false) {
             $this->errorMsg = "File not found: $filepath";
@@ -89,9 +91,9 @@ class FileFetcher {
         }
 
         $content = $this->fetchContents($filepath);
-        # detect original encoding
-        $original_encoding = mb_detect_encoding($content, "UTF-8, ISO-8859-1, ISO-8859-15", true);
-        # now convert
+        // detect original encoding
+        $original_encoding = mb_detect_encoding($content, 'UTF-8, ISO-8859-1, ISO-8859-15', true);
+        // now convert
         if ($original_encoding != 'UTF-8') {
             $content = mb_convert_encoding($content, 'UTF-8', $original_encoding);
         }

@@ -1,4 +1,6 @@
-<?php namespace Pauldro\UtilityBelt\Files;
+<?php
+
+namespace Pauldro\UtilityBelt\Files;
 
 /**
  * Utility for writing to a file
@@ -6,12 +8,13 @@
  * @property string $errorMsg
  * @property string $lastWrittenFile
  */
-class FileWriter {
+class FileWriter
+{
     private static $instance;
     public string $errorMsg;
     public string $lastWrittenFile;
 
-    public static function instance() : FileWriter
+    public static function instance(): FileWriter
     {
         if (empty(self::$instance)) {
             self::$instance = new static();
@@ -25,7 +28,7 @@ class FileWriter {
      * @param  mixed|string  $content
      * @return bool
      */
-    public function write(string $filepath, $content) : bool
+    public function write(string $filepath, $content): bool
     {
         if (boolval(file_put_contents($filepath, $content))) {
             $this->lastWrittenFile = $filepath;
@@ -34,5 +37,4 @@ class FileWriter {
         $this->errorMsg = "Failed to Write File: '$filepath'";
         return false;
     }
-
 }

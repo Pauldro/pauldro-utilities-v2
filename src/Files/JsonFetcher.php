@@ -1,9 +1,12 @@
-<?php namespace Pauldro\UtilityBelt\Files;
+<?php
+
+namespace Pauldro\UtilityBelt\Files;
 
 /**
  * Utility for fetching JSON file contents
  */
-class JsonFetcher extends FileFetcher {
+class JsonFetcher extends FileFetcher
+{
     protected static $instance;
 
     /**
@@ -11,9 +14,9 @@ class JsonFetcher extends FileFetcher {
      * @param  string $filepath
      * @return array
      */
-    public function fetch(string $filepath) : mixed
+    public function fetch(string $filepath): mixed
     {
-       if ($this->exists($filepath) === false) {
+        if ($this->exists($filepath) === false) {
             $this->errorMsg = 'File not found: ' . $filepath;
             return [];
         }
@@ -21,7 +24,7 @@ class JsonFetcher extends FileFetcher {
         $json = json_decode(file_get_contents($filepath), true);
 
         if (empty($json)) {
-            $this->errorMsg = "The '$filepath' JSON contains errors, JSON ERROR: ". json_last_error();
+            $this->errorMsg = "The '$filepath' JSON contains errors, JSON ERROR: " . json_last_error();
         }
         return $json;
     }

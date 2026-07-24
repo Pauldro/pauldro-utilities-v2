@@ -1,4 +1,7 @@
-<?php namespace Pauldro\UtilityBelt\SuperGlobals;
+<?php
+
+namespace Pauldro\UtilityBelt\SuperGlobals;
+
 // Pauldro Util
 use Pauldro\UtilityBelt\Data\SimpleArray;
 use Pauldro\UtilityBelt\Exceptions\MissingEnvVarsException;
@@ -6,36 +9,37 @@ use Pauldro\UtilityBelt\Exceptions\MissingEnvVarsException;
 /**
  * Utility for interacting with the $_ENV vars
  */
-class EnvVarsReader extends AbstractSuperGlobalReader {
-    const GET_OPTIONS = [
+class EnvVarsReader extends AbstractSuperGlobalReader
+{
+    public const GET_OPTIONS = [
         'default' => ''
     ];
 
-    public static function superglobal() : array
+    public static function superglobal(): array
     {
         return $_ENV;
     }
 
-/* =============================================================
-    Reads
-============================================================= */
-    public static function getBool(string $key) : bool
+    /* =============================================================
+        Reads
+    ============================================================= */
+    public static function getBool(string $key): bool
     {
         $value = self::get($key, ['default' => 'false']);
         return $value == 'true';
     }
 
-    public static function getArray(string $key, $delimiter = ',') : array
+    public static function getArray(string $key, $delimiter = ','): array
     {
         return explode($delimiter, self::get($key));
     }
 
-    public static function getInt(string $key) : int
+    public static function getInt(string $key): int
     {
         return intval(self::get($key));
     }
 
-    public static function getFloat(string $key) : float
+    public static function getFloat(string $key): float
     {
         return floatval(self::get($key));
     }
@@ -46,7 +50,7 @@ class EnvVarsReader extends AbstractSuperGlobalReader {
      * @throws MissingEnvVarsException
      * @return bool
      */
-    public static function required(array $vars) : bool
+    public static function required(array $vars): bool
     {
         $missing = new SimpleArray();
 
@@ -72,7 +76,7 @@ class EnvVarsReader extends AbstractSuperGlobalReader {
      * @throws MissingEnvVarsException
      * @return bool
      */
-    public static function requiredPrefixed(array $vars, string $prefix = '') : bool
+    public static function requiredPrefixed(array $vars, string $prefix = ''): bool
     {
         if (empty($prefix)) {
             return self::required($vars);

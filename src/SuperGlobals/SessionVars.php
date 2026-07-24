@@ -1,23 +1,26 @@
-<?php namespace Pauldro\UtilityBelt\SuperGlobals;
+<?php
+
+namespace Pauldro\UtilityBelt\SuperGlobals;
 
 /**
  * Utility for interacting with the $_SESSION vars
  */
-class SessionVars extends AbstractSuperGlobalReader {
-    public static function superglobal() : array
+class SessionVars extends AbstractSuperGlobalReader
+{
+    public static function superglobal(): array
     {
         return $_SESSION;
     }
 
-/* =============================================================
-    Reads
-============================================================= */
+    /* =============================================================
+        Reads
+    ============================================================= */
     /**
      * @param  string $key
      * @param  array{default?:null|mixed} $opts
      * @return mixed
      */
-    public static function get(string $key, $opts = []) : mixed
+    public static function get(string $key, $opts = []): mixed
     {
         $opts = array_merge(static::GET_OPTIONS, $opts);
 
@@ -33,7 +36,7 @@ class SessionVars extends AbstractSuperGlobalReader {
      * @param  string $key  Specify variable name to retrieve, or blank string to return all variables in the namespace.
      * @return mixed
      */
-    public static function getFor(string $ns, $key = '') : mixed
+    public static function getFor(string $ns, $key = ''): mixed
     {
         $data = self::get($ns);
 
@@ -51,21 +54,21 @@ class SessionVars extends AbstractSuperGlobalReader {
      * @param  string $ns
      * @return array
      */
-    public static function getAllFor(string $ns) : mixed
+    public static function getAllFor(string $ns): mixed
     {
         return self::getFor($ns, '');
     }
 
-/* =============================================================
-    Updates
-============================================================= */
+    /* =============================================================
+        Updates
+    ============================================================= */
     /**
      * Set a Session Variable
      * @param string       $key Name of session variable to set
      * @param string|mixed $value Value to set (or name of variable, if first argument is namespace)
      * @param mixed        $_value Value to set if first argument is namespace. Omit otherwise.
      */
-    public static function set($key, $value, $_value = null) : void
+    public static function set($key, $value, $_value = null): void
     {
         if (is_null($_value) === false) {
             self::setFor($key, $value, $_value);
@@ -80,7 +83,7 @@ class SessionVars extends AbstractSuperGlobalReader {
      * @param string $key    Name of session variable you want to set.
      * @param mixed  $value  Value you want to set, or specify null to unset.
      */
-    public static function setFor($ns, $key, $value) : void
+    public static function setFor($ns, $key, $value): void
     {
         $data = self::get($ns);
 
@@ -96,16 +99,16 @@ class SessionVars extends AbstractSuperGlobalReader {
         return;
     }
 
-/* =============================================================
-    Delete
-============================================================= */
+    /* =============================================================
+        Delete
+    ============================================================= */
     /**
      * Delete a Session Variable
      * @param  string $key  Name of session variable to retrieve
      * @param  string $_key Name of session variable to get if first argument is namespace, omit otherwise.
      * @return mixed        Returns value of seession variable, or NULL if not found.
      */
-    public static function delete($key, $_key = null) : void
+    public static function delete($key, $_key = null): void
     {
         if (is_null($_key)) {
             unset($_SESSION[$key]);
@@ -123,7 +126,7 @@ class SessionVars extends AbstractSuperGlobalReader {
      * @param string $ns Namespace
      * @param string $key Provide name of variable to remove, or boolean true to remove all in namespace.
      */
-    public function deleteFor($ns, $key) : void
+    public function deleteFor($ns, $key): void
     {
         self::delete($ns, $key);
         return;
@@ -133,7 +136,7 @@ class SessionVars extends AbstractSuperGlobalReader {
      * Delete all session variables in given namespace
      * @param  string $ns
      */
-    public function deleteAllFor($ns) : void
+    public function deleteAllFor($ns): void
     {
         self::delete($ns, true);
     }

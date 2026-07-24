@@ -1,5 +1,7 @@
-<?php namespace Pauldro\UtilityBelt\Exceptions;
+<?php
 
-class Exception extends \Exception {
+namespace Pauldro\UtilityBelt\Exceptions;
 
+class Exception extends \Exception
+{
 }

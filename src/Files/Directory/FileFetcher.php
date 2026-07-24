@@ -1,42 +1,47 @@
-<?php namespace Pauldro\UtilityBelt\Files\Directory;
+<?php
+
+namespace Pauldro\UtilityBelt\Files\Directory;
+
 // Pauldro
 use Pauldro\UtilityBelt\Exceptions\Exception;
 use Pauldro\UtilityBelt\Files\FileFetcher as Fetcher;
 
 /**
  * Wrapper for fetching files from a single directory
- * 
+ *
  * @property Fetcher $fetcher
  */
-class FileFetcher {
+class FileFetcher
+{
     protected string $dir;
     protected $fetcher;
     public string $errorMsg;
 
-    public function __construct(string $dir) {
+    public function __construct(string $dir)
+    {
         if (is_dir($dir) === false) {
-			throw new Exception("Directory not found: '$dir'");
-		}
-		$this->dir = $dir;
+            throw new Exception("Directory not found: '$dir'");
+        }
+        $this->dir = $dir;
         $this->fetcher = Fetcher::instance();
     }
 
     /**
-	 * Return Filepath
-	 * @param  string $filename
-	 * @return string
-	 */
-	public function filepath(string $filename) : string
+     * Return Filepath
+     * @param  string $filename
+     * @return string
+     */
+    public function filepath(string $filename): string
     {
-		return rtrim($this->dir, '/') . '/' . $filename;
-	}
+        return rtrim($this->dir, '/') . '/' . $filename;
+    }
 
     /**
      * Return if file exists
      * @param  string $filename
      * @return bool
      */
-    public function exists(string $filename) : bool
+    public function exists(string $filename): bool
     {
         return $this->fetcher->exists($this->filepath($filename));
     }
@@ -46,7 +51,7 @@ class FileFetcher {
      * @param  string $filename
      * @return array|bool|string
      */
-    public function fetch(string $filename) : array|bool|string
+    public function fetch(string $filename): array|bool|string
     {
         $data = $this->fetcher->fetch($this->filepath($filename));
 
@@ -61,7 +66,7 @@ class FileFetcher {
      * @param  string $filename
      * @return bool
      */
-    public function delete(string $filename) : bool
+    public function delete(string $filename): bool
     {
         return $this->fetcher->delete($this->filepath($filename));
     }
@@ -71,7 +76,7 @@ class FileFetcher {
      * @param  string $filename
      * @return int
      */
-    public function modified(string $filename) : int
+    public function modified(string $filename): int
     {
         return $this->fetcher->modified($this->filepath($filename));
     }
@@ -81,7 +86,7 @@ class FileFetcher {
      * @param  string $filename
      * @return bool
      */
-    public function convertToUtf8(string $filename) : bool
+    public function convertToUtf8(string $filename): bool
     {
         if ($this->fetcher->convertToUtf8($this->filepath($filename)) === false) {
             $this->errorMsg = $this->fetcher->errorMsg;
