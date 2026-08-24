@@ -1,2 +1,5 @@
 # Editor
 .vscode/
+
+# Dependencies
+/vendor/
