@@ -1,7 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\SuperGlobals;
-
+<?php namespace Pauldro\UtilityBelt\SuperGlobals;
 // Pauldro Util
 use Pauldro\UtilityBelt\Data\SimpleArray;
 use Pauldro\UtilityBelt\Exceptions\MissingEnvVarsException;
@@ -46,9 +43,7 @@ class EnvVarsReader extends AbstractSuperGlobalReader
 
     /**
      * Validate Required variables are set
-     * @param  array $vars
      * @throws MissingEnvVarsException
-     * @return bool
      */
     public static function required(array $vars): bool
     {
@@ -60,7 +55,7 @@ class EnvVarsReader extends AbstractSuperGlobalReader
             }
             $missing->add($var);
         }
-        if ($missing->count() == 0) {
+        if ($missing->count() === 0) {
             return true;
         }
         $e = new MissingEnvVarsException();
@@ -71,10 +66,7 @@ class EnvVarsReader extends AbstractSuperGlobalReader
 
     /**
      * Validate Required variables are set
-     * @param  array  $vars
-     * @param  string $prefix
      * @throws MissingEnvVarsException
-     * @return bool
      */
     public static function requiredPrefixed(array $vars, string $prefix = ''): bool
     {

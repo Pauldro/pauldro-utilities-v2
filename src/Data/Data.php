@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Data;
+<?php namespace Pauldro\UtilityBelt\Data;
 
 use ArrayObject;
 
@@ -78,7 +76,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
     /**
      * Enables use of $var('key')
      * @param string $key
-     * @return mixed
      */
     public function __invoke($key): mixed
     {
@@ -98,7 +95,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
     /**
      * Ensures that isset() and empty() work for this classes properties.
      * @param string $key
-     * @return bool
      */
     public function __isset($key): bool
     {
@@ -107,14 +103,13 @@ class Data implements \IteratorAggregate, \ArrayAccess
 
     protected function isEqual($key, $value1, $value2): bool
     {
-        if ($key) {
-        } // avoid unused argument notice
+        // avoid unused argument notice
         // $key not used here, but may be used by child classes
         return $value1 === $value2;
     }
 
     /* =============================================================
-        Setters
+           Setters
     ============================================================= */
     /**
      * Set a value to this object’s data
@@ -132,7 +127,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
      * NOTE: uses change tracking
      * @param  string $key    Name of property you want to set
      * @param  mixed  $value  Value of property
-     * @return $this
      */
     public function set($key, $value): static
     {
@@ -149,7 +143,7 @@ class Data implements \IteratorAggregate, \ArrayAccess
         }
 
         if ($this->trackChanges) {
-            $oldValue = array_key_exists($key, $this->data) ? $this->data[$key] : null;
+            $oldValue = $this->data[$key] ?? null;
             if ($this->isEqual($key, $oldValue, $value) === false) {
                 $this->trackChange($key, $oldValue, $value);
             }
@@ -162,7 +156,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
      * Set value without tracking change
      * @param  mixed $key
      * @param  mixed $value
-     * @return void
      */
     public function setWithoutTracking($key, $value): static
     {
@@ -182,7 +175,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
     /**
      * Set an array of key=value pairs
      * @param  array $data Associative array of where the keys are property names, and values are… values.
-     * @return $this
      */
     public function setArray(array $data): static
     {
@@ -206,7 +198,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
             return;
         }
         $this->set($key, $value);
-        return;
     }
 
     /* =============================================================
@@ -219,7 +210,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
     public function __unset($key): void
     {
         $this->remove($key);
-        return;
     }
 
     /**
@@ -228,24 +218,22 @@ class Data implements \IteratorAggregate, \ArrayAccess
      * $item->remove('some_property');
      * ~~~~~
      * @param string $key Name of property you want to remove
-     * @return $this
      */
     public function remove($key): static
     {
-        $value = isset($this->data[$key]) ? $this->data[$key] : null;
-        $this->trackChange($key, $value, null);
+        $value = $this->data[$key] ?? null;
+        $this->trackChange($key, $value);
         unset($this->data[$key]);
         return $this;
     }
 
     /* =============================================================
-        IteratorAggregate Interface Functions
+           IteratorAggregate Interface Functions
     ============================================================= */
     /**
      * Enables the object data properties to be iterable as an array
-     * @return ArrayObject
      */
-    public function getIterator(): ArrayObject
+    public function getIterator(): \Traversable
     {
         return new ArrayObject($this->data);
     }
@@ -270,7 +258,7 @@ class Data implements \IteratorAggregate, \ArrayAccess
     public function offsetGet($key): mixed
     {
         $value = $this->get($key);
-        return is_null($value) ? false : $value;
+        return $value ?? false;
     }
 
     /**
@@ -284,7 +272,6 @@ class Data implements \IteratorAggregate, \ArrayAccess
             $this->remove($key);
             return;
         }
-        return;
     }
 
     /**
@@ -346,7 +333,7 @@ class Data implements \IteratorAggregate, \ArrayAccess
     {
         $keys = array_keys($this->changes);
 
-        if (empty($keys)) {
+        if ($keys === []) {
             return [];
         }
         $list = [];

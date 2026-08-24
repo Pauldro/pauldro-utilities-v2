@@ -1,7 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Files;
-
+<?php namespace Pauldro\UtilityBelt\Files;
 // Base PHP
 use SplFileInfo;
 

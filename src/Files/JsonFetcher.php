@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Files;
+<?php namespace Pauldro\UtilityBelt\Files;
 
 /**
  * Utility for fetching JSON file contents
@@ -11,7 +9,6 @@ class JsonFetcher extends FileFetcher
 
     /**
      * Fetch File Contents
-     * @param  string $filepath
      * @return array
      */
     public function fetch(string $filepath): mixed

@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Exceptions;
+<?php namespace Pauldro\UtilityBelt\Exceptions;
 
 class MissingEnvVarsException extends Exception
 {
@@ -15,7 +13,6 @@ class MissingEnvVarsException extends Exception
     /**
      * Set .env filepath
      * @param  string $filepath
-     * @return void
      */
     public function setFilepath($filepath): void
     {
@@ -24,7 +21,6 @@ class MissingEnvVarsException extends Exception
 
     /**
      * Generate Error Message
-     * @return void
      */
     public function generateMessage(): void
     {

@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Files\Directory;
+<?php namespace Pauldro\UtilityBelt\Files\Directory;
 
 // Pauldro
 use Pauldro\UtilityBelt\Exceptions\Exception;
@@ -28,8 +26,6 @@ class FileFetcher
 
     /**
      * Return Filepath
-     * @param  string $filename
-     * @return string
      */
     public function filepath(string $filename): string
     {
@@ -38,8 +34,6 @@ class FileFetcher
 
     /**
      * Return if file exists
-     * @param  string $filename
-     * @return bool
      */
     public function exists(string $filename): bool
     {
@@ -48,8 +42,6 @@ class FileFetcher
 
     /**
      * Return File Contents
-     * @param  string $filename
-     * @return array|bool|string
      */
     public function fetch(string $filename): array|bool|string
     {
@@ -63,8 +55,6 @@ class FileFetcher
 
     /**
      * Delete File
-     * @param  string $filename
-     * @return bool
      */
     public function delete(string $filename): bool
     {
@@ -73,8 +63,6 @@ class FileFetcher
 
     /**
      * Return File Modified timestamp
-     * @param  string $filename
-     * @return int
      */
     public function modified(string $filename): int
     {
@@ -83,8 +71,6 @@ class FileFetcher
 
     /**
      * Convert File to UTF-8
-     * @param  string $filename
-     * @return bool
      */
     public function convertToUtf8(string $filename): bool
     {

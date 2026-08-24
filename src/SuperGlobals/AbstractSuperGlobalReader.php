@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\SuperGlobals;
+<?php namespace Pauldro\UtilityBelt\SuperGlobals;
 
 abstract class AbstractSuperGlobalReader
 {
@@ -16,9 +14,7 @@ abstract class AbstractSuperGlobalReader
     }
 
     /**
-     * @param  string $key
      * @param  array{default?:null|mixed} $opts
-     * @return mixed
      */
     public static function get(string $key, $opts = []): mixed
     {

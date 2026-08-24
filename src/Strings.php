@@ -1,16 +1,10 @@
-<?php
-
-namespace Pauldro\UtilityBelt;
+<?php namespace Pauldro\UtilityBelt;
 
 class Strings
 {
     /**
      * Add Padding to string
      * NOTE: padding is added to the right of string
-     * @param  string  $value
-     * @param  int     $length
-     * @param  string  $padding
-     * @return string
      */
     public static function pad(string $value, int $length, string $padding = ' '): string
     {
@@ -19,8 +13,6 @@ class Strings
 
     /**
      * Return longest string length from list of strings
-     * @param  array $strings
-     * @return int
      */
     public static function longestStrlen(array $strings): int
     {
@@ -36,12 +28,10 @@ class Strings
     /**
      * Convert string to be all camelCase
      *
-     * @param string $value
      * @param array  $opts  options:
      *  - `allowed` (string): Characters to allow or range of characters to allow, for placement in regex (default='a-zA-Z0-9').
      *  - `startLowercase` (bool): Always start return value with lowercase character? (default=true)
      *  - `startNumber` (bool): Allow return value to begin with a number? (default=false)
-     * @return string
      */
     public static function camelCase(string $value, array $opts = []): string
     {
@@ -82,7 +72,7 @@ class Strings
         }
 
         if ($opts['startNumber'] === false) {
-            $value = ltrim($value, '0123456789');
+            return ltrim($value, '0123456789');
         }
         return $value;
     }
@@ -92,7 +82,6 @@ class Strings
      *
      * EXAMPLE: FooBar becomes foo-bar
      *
-     * @param string $value
      * @param array  $options .
      *  - `hyphen` (string): Character to use as the hyphen (default='-')
      *  - `allow` (string): Characters to allow or range of characters to allow, for placement in regex (default='a-z0-9').
@@ -109,7 +98,7 @@ class Strings
         $options = array_merge($defaults, $options);
         $hyphen = $options['hyphen'];
 
-        if (strlen($value) == 0) {
+        if ($value === '') {
             return '';
         }
 

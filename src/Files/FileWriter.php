@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Files;
+<?php namespace Pauldro\UtilityBelt\Files;
 
 /**
  * Utility for writing to a file
@@ -26,7 +24,6 @@ class FileWriter
      * Write to File
      * @param  string        $filepath filepath
      * @param  mixed|string  $content
-     * @return bool
      */
     public function write(string $filepath, $content): bool
     {

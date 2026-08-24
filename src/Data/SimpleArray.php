@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Data;
+<?php namespace Pauldro\UtilityBelt\Data;
 
 use ArrayObject;
 
@@ -19,7 +17,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * Return the item at the given index, or null if not set.
      * @param  int|string $key  Provide any of the following:
-     * @return mixed
      */
     public function get($key): mixed
     {
@@ -32,7 +29,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * Return if Item Exists by Key
      * @param  int|string $key Provide any of the following:
-     * @return bool
      */
     public function has($key): bool
     {
@@ -71,7 +67,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * Return the first item in the SimpleArray or boolean false if empty.
      * Note that this resets the internal SimpleArray pointer, which would affect other active iterations.
-     * @return mixed
      */
     public function first(): mixed
     {
@@ -100,7 +95,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
      *
      * @param  int $start  Starting index.
      * @param  int $limit  Number of items to include. If omitted, includes the rest of the array.
-     * @return SimpleArray
      */
     public function subset($start, $limit = 0): SimpleArray
     {
@@ -121,7 +115,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
      * Set an item by key in the SimpleArray
      * @param  int|string $key   Key of item to set.
      * @param  mixed      $value Item value to set.
-     * @return $this
      */
     public function set($key, $value): static
     {
@@ -135,7 +128,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
      * $list->add($item);
      * ~~~~~
      * @param  mixed $item Item to add.
-     * @return $this
      */
     public function add($item): static
     {
@@ -149,7 +141,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
      * $list->set($items);
      * ~~~~~
      * @param  array Set Array
-     * @return $this
      */
     public function setArray($items = []): static
     {
@@ -163,7 +154,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * Remove the given item or index from the SimpleArray (if it exists).
      * @param int|string $key Item to remove (object), or index of that item.
-     * @return $this
      */
     public function remove($key): static
     {
@@ -187,9 +177,8 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
      *   // ...
      * }
      * ~~~~~
-     * @return ArrayObject
      */
-    public function getIterator(): ArrayObject
+    public function getIterator(): \Traversable
     {
         return new ArrayObject($this->data);
     }
@@ -202,7 +191,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
      * $qty = $items->count();
      * $qty = count($items);
      * ~~~~~
-     * @return int
      */
     public function count(): int
     {
@@ -223,7 +211,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * Returns the value of the item at the given index, or false if not set.
      * @param int|string $key Key of item to retrieve.
-     * @return mixed
      */
     public function offsetGet($key): mixed
     {
@@ -245,7 +232,6 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
             $this->remove($key);
             return;
         }
-        return;
     }
 
     /**

@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Files;
+<?php namespace Pauldro\UtilityBelt\Files;
 
 /**
  * Utility for fetching file contents
@@ -24,8 +22,6 @@ class FileFetcher
 
     /**
      * Return if file exists
-     * @param  string $filepath
-     * @return bool
      */
     public function exists(string $filepath): bool
     {
@@ -34,8 +30,6 @@ class FileFetcher
 
     /**
      * Fetch File Contents
-     * @param  string $filepath
-     * @return bool|string
      */
     public function fetchContents(string $filepath): bool|string
     {
@@ -44,8 +38,6 @@ class FileFetcher
 
     /**
      * Fetch File Contents
-     * @param  string $filepath
-     * @return mixed
      */
     public function fetch(string $filepath): mixed
     {
@@ -57,8 +49,6 @@ class FileFetcher
 
     /**
      * Delete File
-     * @param  string $filepath
-     * @return bool
      */
     public function delete(string $filepath): bool
     {
@@ -80,8 +70,6 @@ class FileFetcher
 
     /**
      * Convert File to UTF-8 encoding
-     * @param  string $filepath
-     * @return bool
      */
     public function convertToUtf8(string $filepath): bool
     {

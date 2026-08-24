@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Files\Directory;
+<?php namespace Pauldro\UtilityBelt\Files\Directory;
 
 // Pauldro Minicli
 use Pauldro\UtilityBelt\Files\JsonFetcher as Fetcher;
@@ -22,8 +20,6 @@ class JsonFetcher extends FileFetcher
 
     /**
      * Return Filepath
-     * @param  string $filename
-     * @return string
      */
     public function filepath(string $filename): string
     {

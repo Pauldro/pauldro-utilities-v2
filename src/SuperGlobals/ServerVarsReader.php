@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\SuperGlobals;
+<?php namespace Pauldro\UtilityBelt\SuperGlobals;
 
 /**
  * Utility for interacting with the $_SERVER vars

@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Files;
+<?php namespace Pauldro\UtilityBelt\Files;
 
 /**
  * Utility for copying files
@@ -26,9 +24,6 @@ class FileCopier
 
     /**
      * Copy source file to source destination
-     * @param  string $fromFile
-     * @param  string $toFile
-     * @return bool
      */
     public function copy(string $fromFile, string $toFile): bool
     {

@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\SuperGlobals;
+<?php namespace Pauldro\UtilityBelt\SuperGlobals;
 
 /**
  * Utility for interacting with the $_SESSION vars
@@ -16,9 +14,7 @@ class SessionVars extends AbstractSuperGlobalReader
         Reads
     ============================================================= */
     /**
-     * @param  string $key
      * @param  array{default?:null|mixed} $opts
-     * @return mixed
      */
     public static function get(string $key, $opts = []): mixed
     {
@@ -34,7 +30,6 @@ class SessionVars extends AbstractSuperGlobalReader
      * Get a session variable within a given namespace
      * @param  string $ns   Namespace string
      * @param  string $key  Specify variable name to retrieve, or blank string to return all variables in the namespace.
-     * @return mixed
      */
     public static function getFor(string $ns, $key = ''): mixed
     {
@@ -46,12 +41,11 @@ class SessionVars extends AbstractSuperGlobalReader
         if ($key === '') {
             return $data;
         }
-        return isset($data[$key]) ? $data[$key] : null;
+        return $data[$key] ?? null;
     }
 
     /**
      * Get all session variables for given namespace and return associative array
-     * @param  string $ns
      * @return array
      */
     public static function getAllFor(string $ns): mixed
@@ -96,7 +90,6 @@ class SessionVars extends AbstractSuperGlobalReader
             $data[$key] = $value;
         }
         self::set($ns, $data);
-        return;
     }
 
     /* =============================================================
@@ -129,7 +122,6 @@ class SessionVars extends AbstractSuperGlobalReader
     public function deleteFor($ns, $key): void
     {
         self::delete($ns, $key);
-        return;
     }
 
     /**

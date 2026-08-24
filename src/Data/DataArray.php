@@ -1,6 +1,4 @@
-<?php
-
-namespace Pauldro\UtilityBelt\Data;
+<?php namespace Pauldro\UtilityBelt\Data;
 
 /**
  * Container for Data lists
@@ -32,7 +30,6 @@ class DataArray extends SimpleArray
 
     /**
      * Return new/blank item of the type that this DataArray holds
-     * @return Data
      */
     public function newItem(): Data
     {
@@ -41,8 +38,6 @@ class DataArray extends SimpleArray
 
     /**
      * Return all the values for a fieldname
-     * @param  string $name
-     * @return array
      */
     public function fieldValues(string $name): array
     {
