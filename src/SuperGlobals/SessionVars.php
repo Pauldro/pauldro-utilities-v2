@@ -62,7 +62,7 @@ class SessionVars extends AbstractSuperGlobalReader
      * @param string|mixed $value Value to set (or name of variable, if first argument is namespace)
      * @param mixed        $_value Value to set if first argument is namespace. Omit otherwise.
      */
-    public static function set($key, $value, $_value = null): void
+    public static function set(string $key, mixed $value, mixed $_value = null): void
     {
         if (is_null($_value) === false) {
             self::setFor($key, $value, $_value);
@@ -77,7 +77,7 @@ class SessionVars extends AbstractSuperGlobalReader
      * @param string $key    Name of session variable you want to set.
      * @param mixed  $value  Value you want to set, or specify null to unset.
      */
-    public static function setFor($ns, $key, $value): void
+    public static function setFor(string $ns, string $key, mixed $value): void
     {
         $data = self::get($ns);
 
@@ -99,9 +99,8 @@ class SessionVars extends AbstractSuperGlobalReader
      * Delete a Session Variable
      * @param  string $key  Name of session variable to retrieve
      * @param  string $_key Name of session variable to get if first argument is namespace, omit otherwise.
-     * @return mixed        Returns value of seession variable, or NULL if not found.
      */
-    public static function delete($key, $_key = null): void
+    public static function delete(string $key, ?string $_key = null): void
     {
         if (is_null($_key)) {
             unset($_SESSION[$key]);
@@ -119,7 +118,7 @@ class SessionVars extends AbstractSuperGlobalReader
      * @param string $ns Namespace
      * @param string $key Provide name of variable to remove, or boolean true to remove all in namespace.
      */
-    public function deleteFor($ns, $key): void
+    public function deleteFor(string $ns, string $key): void
     {
         self::delete($ns, $key);
     }
@@ -128,7 +127,7 @@ class SessionVars extends AbstractSuperGlobalReader
      * Delete all session variables in given namespace
      * @param  string $ns
      */
-    public function deleteAllFor($ns): void
+    public function deleteAllFor(string $ns): void
     {
         self::delete($ns, true);
     }
