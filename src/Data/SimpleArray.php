@@ -11,9 +11,9 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
 {
     protected $data = [];
 
-    /* =============================================================
-        Getters
-    ============================================================= */
+/* =============================================================
+    Getters
+============================================================= */
     /**
      * Return the item at the given index, or null if not set.
      * @param  int|string $key  Provide any of the following:
@@ -108,9 +108,9 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
         return $items;
     }
 
-    /* =============================================================
-        Setters
-    ============================================================= */
+/* =============================================================
+    Setters
+============================================================= */
     /**
      * Set an item by key in the SimpleArray
      * @param  int|string $key   Key of item to set.
@@ -136,11 +136,10 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * Set Entire SimpleArray.
      * ~~~~~
      * $list->set($items);
      * ~~~~~
-     * @param  array Set Array
+     * @param array $items
      */
     public function setArray($items = []): static
     {
@@ -148,9 +147,9 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
         return $this;
     }
 
-    /* =============================================================
-        Removal
-    ============================================================= */
+/* =============================================================
+    Removal
+============================================================= */
     /**
      * Remove the given item or index from the SimpleArray (if it exists).
      * @param int|string $key Item to remove (object), or index of that item.
@@ -163,9 +162,9 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
         return $this;
     }
 
-    /* =============================================================
-        Interface Functions
-    ============================================================= */
+/* =============================================================
+    Interface Functions
+============================================================= */
     /**
      * Allows iteration of the SimpleArray.
      * - Fulfills PHP's IteratorAggregate interface so that you can traverse the SimpleArray.
@@ -224,7 +223,7 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
      * Unsets the value at the given index.
      * For the \ArrayAccess interface.
      * @param int|string $key Key of the item to unset.
-     * @return bool True if item existed and was unset. False if item didn't exist.
+     * @return voidl True if item existed and was unset. False if item didn't exist.
      */
     public function offsetUnset($key): void
     {

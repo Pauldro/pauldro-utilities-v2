@@ -12,9 +12,9 @@ class MissingEnvVarsException extends Exception
 
     /**
      * Set .env filepath
-     * @param  string $filepath
+     * @param string $filepath
      */
-    public function setFilepath($filepath): void
+    public function setFilepath(string $filepath): void
     {
         $this->filepath = $filepath;
     }

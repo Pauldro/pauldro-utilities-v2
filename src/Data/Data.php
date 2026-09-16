@@ -15,9 +15,9 @@ class Data implements \IteratorAggregate, \ArrayAccess
     protected $trackChanges = false;
     protected $changes = [];
 
-    /* =============================================================
-        Getters
-    ============================================================= */
+/* =============================================================
+    Getters
+============================================================= */
     /**
      * Returns the full array of properties set to this object
      *
@@ -108,9 +108,9 @@ class Data implements \IteratorAggregate, \ArrayAccess
         return $value1 === $value2;
     }
 
-    /* =============================================================
-           Setters
-    ============================================================= */
+/* =============================================================
+    Setters
+============================================================= */
     /**
      * Set a value to this object’s data
      *
@@ -200,9 +200,9 @@ class Data implements \IteratorAggregate, \ArrayAccess
         $this->set($key, $value);
     }
 
-    /* =============================================================
-        Removal
-    ============================================================= */
+/* =============================================================
+    Removal
+============================================================= */
     /**
      * Ensures that unset() works for this classes data.
      * @param string $key
@@ -227,9 +227,9 @@ class Data implements \IteratorAggregate, \ArrayAccess
         return $this;
     }
 
-    /* =============================================================
-           IteratorAggregate Interface Functions
-    ============================================================= */
+/* =============================================================
+    IteratorAggregate Interface Functions
+============================================================= */
     /**
      * Enables the object data properties to be iterable as an array
      */
@@ -238,9 +238,9 @@ class Data implements \IteratorAggregate, \ArrayAccess
         return new ArrayObject($this->data);
     }
 
-    /* =============================================================
-        ArrayAccess Interface Functions
-    ============================================================= */
+/* =============================================================
+    ArrayAccess Interface Functions
+============================================================= */
     /**
      * Sets an index in the Array.
      * @param int|string              $key    Key of item to set.
@@ -284,9 +284,9 @@ class Data implements \IteratorAggregate, \ArrayAccess
         return $this->__isset($key);
     }
 
-    /* =============================================================
-        Changes
-    ============================================================= */
+/* =============================================================
+    Changes
+============================================================= */
     public function getTrackChanges(): bool
     {
         return $this->trackChanges;
