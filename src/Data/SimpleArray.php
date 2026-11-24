@@ -162,6 +162,12 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
         return $this;
     }
 
+    public function clear(): static
+    {
+        $this->data = [];
+        return $this;
+    }
+
 /* =============================================================
     Interface Functions
 ============================================================= */
