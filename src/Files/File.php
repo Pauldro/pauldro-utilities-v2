@@ -15,7 +15,10 @@ class File extends SplFileInfo
         return count(glob($this->getPathname() . '/*', 0));
     }
 
-    public function countFilesWithExtension(string $ext): int
+    /**
+     * @param string|array $extension
+     */
+    public function countFilesWithExtension($extension): int
     {
         if ($this->isFile()) {
             return 1;
@@ -23,7 +26,11 @@ class File extends SplFileInfo
         if ($this->isDir() === false) {
             return 0;
         }
-        return count(glob($this->getPathname() . "/*.$ext", 0));
+        if (is_array($extension)) {
+            $extensions = "{" . implode(',', $extension) ."}";
+            return count(glob($this->getPathname() . "/*.$extensions", GLOB_BRACE));
+        }
+        return count(glob($this->getPathname() . "/*.$extension", 0));
     }
 
     /**
