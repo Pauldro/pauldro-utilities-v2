@@ -36,6 +36,21 @@ class File extends SplFileInfo
     /**
      * @param string|array $extension
      */
+    public function listFilesWithExtension($extension): array
+    {
+        if ($this->isDir() === false) {
+            return [];
+        }
+        if (is_array($extension)) {
+            $extensions = "{" . implode(',', $extension) ."}";
+            return glob($this->getPathname() . "/*.$extensions", GLOB_BRACE);
+        }
+        return glob($this->getPathname() . "/*.$extension", 0);
+    }
+
+    /**
+     * @param string|array $extension
+     */
     public function hasExtension($extension): bool
     {
         if (is_array($extension)) {
